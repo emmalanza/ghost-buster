@@ -1,4 +1,4 @@
-package com.f5.ghost-buster;
+package com.f5.ghostbuster;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
