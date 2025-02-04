@@ -14,7 +14,7 @@ class GhostBuster {
         return ghosts;
     }
     public boolean freeGhost(int id) {
-        return false;
+        return ghosts.removeIf(ghost -> ghost.getId() == id);
     }
     public List<Ghost> filterGhostsByClass() {
         return new ArrayList<>();
