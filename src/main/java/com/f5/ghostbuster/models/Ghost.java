@@ -34,7 +34,7 @@ public class Ghost {
         return ability;
     }
 
-    public LocalDate getCaptureDate() {
+    public LocalDate getDateOfCapture() {
         return captureDate;
     }
    public enum Class {
