@@ -12,15 +12,15 @@ public class GhostTest {
         private String name;
         private Ghost.Class ghostClass;
         private Ghost.DangerLevel dangerLevel;
-        private String hability;
+        private String ability;
 
         @BeforeEach
         public void setUp() {
             name = "Espíritu del Pescador de Lastres";
             ghostClass = Ghost.Class.IV;
             dangerLevel = Ghost.DangerLevel.ALTO;
-            hability = "Aparecer durante tormentas en la costa";
-            ghost = new Ghost(name, ghostClass, dangerLevel, hability);
+            ability = "Aparecer durante tormentas en la costa";
+            ghost = new Ghost(name, ghostClass, dangerLevel, ability);
         }
     @Test
     @DisplayName("Initializing correctly ghost name")
@@ -39,6 +39,6 @@ public class GhostTest {
     public void testInitialCorrectlyGhostAbility() {
         
         //Then
-        assertThat(ghost.getability(), is(ability));
+        assertThat(ghost.getAbility(), is(ability));
     }
 }
