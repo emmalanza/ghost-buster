@@ -3,13 +3,23 @@ package com.f5.ghostbuster.models;
 public class Ghost {
 
     private String name;
+    private Ghost.Class ghostClass;
+    private Ghost.DangerLevel dangerLevel;
+    private String ability;
 
-    public Ghost(String name, Ghost.Class ghostClass, Ghost.DangerLevel dangerLevel, String hability) {
+       public Ghost(String name, Class ghostClass, DangerLevel dangerLevel, String ability) {
         this.name = name;
+        this.ghostClass = ghostClass;
+        this.dangerLevel = dangerLevel;
+        this.ability = ability;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getAbility() {
+        return ability;
     }
 
    public enum Class {

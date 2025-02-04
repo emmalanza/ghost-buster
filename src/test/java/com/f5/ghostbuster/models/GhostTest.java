@@ -35,10 +35,10 @@ public class GhostTest {
     }
     
     @Test
-    @DisplayName("Initializing correctly hability of ghost")
-    public void testInitialCorrectlyHabilityGhost() {
+    @DisplayName("Initializing correctly ability of ghost")
+    public void testInitialCorrectlyGhostAbility() {
         
         //Then
-        assertThat(ghost.getHability(), is(hability));
+        assertThat(ghost.getability(), is(ability));
     }
 }
