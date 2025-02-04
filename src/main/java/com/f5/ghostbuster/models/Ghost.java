@@ -1,17 +1,21 @@
 package com.f5.ghostbuster.models;
 
+import java.time.LocalDate;
+
 public class Ghost {
 
     private String name;
     private Ghost.Class ghostClass;
     private Ghost.DangerLevel dangerLevel;
     private String ability;
+    private LocalDate captureDate;
 
        public Ghost(String name, Class ghostClass, DangerLevel dangerLevel, String ability) {
         this.name = name;
         this.ghostClass = ghostClass;
         this.dangerLevel = dangerLevel;
         this.ability = ability;
+        this.captureDate = LocalDate.now();
     }
 
     public String getName() {
@@ -30,6 +34,9 @@ public class Ghost {
         return ability;
     }
 
+    public LocalDate getCaptureDate() {
+        return captureDate;
+    }
    public enum Class {
         I, II, III, IV, V
     }
