@@ -41,4 +41,13 @@ public class GhostTest {
         //Then
         assertThat(ghost.getAbility(), is(ability));
     }
+
+    @Test
+    @DisplayName("Initializing correctly ghost class")
+
+    public void testInitialCorrectlyGhostClass() {
+        
+        //Then
+        assertThat(ghost.getGhostClass(), is(ghostClass));
+    }
 }
