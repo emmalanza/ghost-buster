@@ -7,9 +7,11 @@ import java.util.List;
 class GhostBuster {
     private List<Ghost> ghosts = new ArrayList<>();
 
-    public void captureGhost(Ghost ghost) {}
+    public void captureGhost(Ghost ghost) {
+        ghosts.add(ghost);
+    }
     public List<Ghost> getAllGhost() {
-        return new ArrayList<>();
+        return ghosts;
     }
     public boolean freeGhost(int id) {
         return false;
