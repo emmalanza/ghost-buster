@@ -68,4 +68,12 @@ public class GhostTest {
         //Then
         assertThat(ghost.getDateOfCapture(), is(notNullValue()));
     }
+
+    @Test
+    @DisplayName("The ghost's ID is greater than zero")
+    public void testGhostIdGreaterThanZero() {
+        
+        //Then
+        assertThat(ghost.getId(), is(not(0)));
+    }
 }
