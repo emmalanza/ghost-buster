@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
 
 public class GhostTest {
 
@@ -57,5 +59,13 @@ public class GhostTest {
         
         //Then
         assertThat(ghost.getDangerLevel(), is(dangerLevel));
+    }
+
+    @Test
+    @DisplayName("Correctly initialize the date of capture of the ghost")
+    public void testCorrectlyInitializeDateOfCapture() {
+        
+        //Then
+        assertThat(ghost.getDateOfCapture(), is(notNullValue()));
     }
 }
