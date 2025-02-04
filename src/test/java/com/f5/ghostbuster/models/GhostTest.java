@@ -36,7 +36,7 @@ public class GhostTest {
     
     @Test
     @DisplayName("Initializing correctly ability of ghost")
-    public void testInitialCorrectlyGhostAbility() {
+    public void testInitialCorrectlyGhostAbility(){
         
         //Then
         assertThat(ghost.getAbility(), is(ability));
@@ -49,5 +49,13 @@ public class GhostTest {
         
         //Then
         assertThat(ghost.getGhostClass(), is(ghostClass));
+    }
+
+    @Test
+    @DisplayName("Initializing correctly ghost danger level")
+    public void testInitialCorrectlyGhostDangerLevel() {
+        
+        //Then
+        assertThat(ghost.getDangerLevel(), is(dangerLevel));
     }
 }
