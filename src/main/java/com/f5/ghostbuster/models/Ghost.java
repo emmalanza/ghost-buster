@@ -4,6 +4,14 @@ import java.time.LocalDate;
 
 public class Ghost {
 
+    public enum Class {
+        I, II, III, IV, V
+    }
+
+    public enum DangerLevel {
+        BAJO, MEDIO, ALTO, CRITICO
+    }
+    
     private static int counter = 0;
     private int id;
     private String name;
@@ -43,11 +51,5 @@ public class Ghost {
     public LocalDate getDateOfCapture() {
         return captureDate;
     }
-   public enum Class {
-        I, II, III, IV, V
-    }
 
-    public enum DangerLevel {
-        BAJO, MEDIO, ALTO, CRITICO
-    }
 }
