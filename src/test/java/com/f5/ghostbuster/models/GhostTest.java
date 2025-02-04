@@ -32,7 +32,13 @@ public class GhostTest {
 
         //Then
         assertThat(ghost.getName(), is(name));
-
     }
     
+    @Test
+    @DisplayName("Initializing correctly hability of ghost")
+    public void testInitialCorrectlyHabilityGhost() {
+        
+        //Then
+        assertThat(ghost.getHability(), is(hability));
+    }
 }
