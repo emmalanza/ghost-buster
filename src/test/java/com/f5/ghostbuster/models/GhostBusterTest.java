@@ -37,6 +37,12 @@ public class GhostBusterTest {
         assertEquals(3, ghostBuster.getAllGhost().size());
     }
 
+    @Test void testFilterGhostsByClass() {
+        assertEquals(1, ghostBuster.filterGhostsByClass(Ghost.Class.I).size());
+    }
+
+
+
 
     
 }

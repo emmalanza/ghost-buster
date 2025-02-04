@@ -16,7 +16,7 @@ class GhostBuster {
     public boolean freeGhost(int id) {
         return ghosts.removeIf(ghost -> ghost.getId() == id);
     }
-    public List<Ghost> filterGhostsByClass() {
+    public List<Ghost> filterGhostsByClass(Ghost.Class ghostClass) {
         return new ArrayList<>();
     }
     public List<Ghost> filterGhostsByDate(LocalDate date) {
