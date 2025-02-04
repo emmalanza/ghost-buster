@@ -1,6 +1,8 @@
 package com.f5.ghostbuster.models;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GhostBusterTest {
     private GhostBuster ghostBuster;
@@ -13,6 +15,18 @@ public class GhostBusterTest {
         ghostBuster.captureGhost(ghost1);
         ghostBuster.captureGhost(ghost2);
         ghostBuster.captureGhost(ghost3);   
+    }
+
+
+    @Test
+    public void testCaptureGhost() {
+       ghostBuster.captureGhost(new Ghost("Espíritu del Pescador de Lastres", Ghost.Class.IV, 
+       Ghost.DangerLevel.ALTO, "Aparecer durante tormentas en la costa"));
+       assertEquals(4, ghostBuster.getAllGhost().size());
+    }
+    @Test
+    public void testGetAllGhosts() {
+       assertEquals(3, ghostBuster.getAllGhost().size());
     }
 
     
