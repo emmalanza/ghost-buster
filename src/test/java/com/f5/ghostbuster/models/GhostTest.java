@@ -76,4 +76,15 @@ public class GhostTest {
         //Then
         assertThat(ghost.getId(), is(not(0)));
     }
+
+    @Test
+    @DisplayName("Every Ghost has a different ID")
+    public void testEveryGhostHasDifferentId() {
+        
+        //Given
+        Ghost anotherGhost = new Ghost("Espíritu del Pescador de Lastres", Ghost.Class.IV, Ghost.DangerLevel.ALTO, "Aparecer durante tormentas en la costa");
+
+        //Then
+        assertThat(ghost.getId(), is(not(anotherGhost.getId())));
+    }
 }
