@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 public class Ghost {
 
+    private static int counter = 0;
+    private int id;
     private String name;
     private Ghost.Class ghostClass;
     private Ghost.DangerLevel dangerLevel;
@@ -11,6 +13,7 @@ public class Ghost {
     private LocalDate captureDate;
 
        public Ghost(String name, Class ghostClass, DangerLevel dangerLevel, String ability) {
+        this.id = ++counter;
         this.name = name;
         this.ghostClass = ghostClass;
         this.dangerLevel = dangerLevel;
@@ -18,6 +21,9 @@ public class Ghost {
         this.captureDate = LocalDate.now();
     }
 
+    public int getId() {
+        return id;
+    }
     public String getName() {
         return name;
     }
