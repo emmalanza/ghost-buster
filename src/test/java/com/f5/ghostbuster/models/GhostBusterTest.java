@@ -29,5 +29,14 @@ public class GhostBusterTest {
        assertEquals(3, ghostBuster.getAllGhost().size());
     }
 
+    @Test 
+    public void testFreeGhost() {
+        Ghost ghost = new Ghost("Espíritu de Turón", Ghost.Class.I, Ghost.DangerLevel.BAJO, "Aparecer durante tormentas en la costa");
+        ghostBuster.captureGhost(ghost);
+        assertEquals(true, ghostBuster.freeGhost(ghost.getId()));
+        assertEquals(3, ghostBuster.getAllGhost().size());
+    }
+
+
     
 }
