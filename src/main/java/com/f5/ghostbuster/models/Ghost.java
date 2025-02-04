@@ -18,9 +18,12 @@ public class Ghost {
         return name;
     }
 
-    
     public Ghost.Class getGhostClass() {
         return ghostClass;
+    }
+    
+    public Ghost.DangerLevel getDangerLevel() {
+        return dangerLevel;
     }
 
     public String getAbility() {
