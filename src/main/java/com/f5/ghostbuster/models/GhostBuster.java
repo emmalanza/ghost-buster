@@ -21,7 +21,9 @@ class GhostBuster {
         return ghosts.stream().filter(ghost -> ghost.getGhostClass() == ghostClass).toList();
     }
     public List<Ghost> filterGhostsByDate(LocalDate date) {
-        return new ArrayList<>();
+        
+        return ghosts.stream().filter(ghost -> ghost.getDateOfCapture().equals(date)).toList();
     }
+
 
 }
