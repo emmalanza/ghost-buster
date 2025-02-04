@@ -41,7 +41,11 @@ public class GhostBusterTest {
         assertEquals(1, ghostBuster.filterGhostsByClass(Ghost.Class.I).size());
     }
 
-
+    @Test void testFilterGhostsByDate() {   
+        Ghost ghost = new Ghost("Espíritu de Turón", Ghost.Class.I, Ghost.DangerLevel.BAJO, "Aparecer durante tormentas en la costa");
+        ghostBuster.captureGhost(ghost);
+        assertEquals(4, ghostBuster.filterGhostsByDate(ghost.getDateOfCapture()).size());
+    }
 
 
     
