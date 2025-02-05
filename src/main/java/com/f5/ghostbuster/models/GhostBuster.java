@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-class GhostBuster {
+public class GhostBuster {
     private List<Ghost> ghosts = new ArrayList<>();
 
     public void captureGhost(Ghost ghost) {
