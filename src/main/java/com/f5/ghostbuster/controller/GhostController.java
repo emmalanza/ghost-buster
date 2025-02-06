@@ -35,6 +35,12 @@ public class GhostController {
             view.showMessage("Fantasma con ID " + id + " no encontrado."); 
         }
     }
+
+    public void filterGhostsByClass() {
+        Ghost.Class ghostClass = view.getGhostClass();
+        List<Ghost> ghosts = model.filterGhostsByClass(ghostClass);
+        view.showAllGhosts(ghosts);
+    }
 }
 
     

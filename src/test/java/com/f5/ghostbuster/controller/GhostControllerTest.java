@@ -85,7 +85,7 @@ public class GhostControllerTest {
         }
 
         @Test
-        @DisplayName("Test para verificar que se filtran los fantasmas por clase")
+        @DisplayName("Verify that the ghosts are filtered by class")
         void testFilterGhostsByClass() {
             
             when(mockView.getGhostClass()).thenReturn(Ghost.Class.III);
