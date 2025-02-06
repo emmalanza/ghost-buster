@@ -84,4 +84,21 @@ public class GhostControllerTest {
             verify(mockView).showMessage("Fantasma liberado exitosamente.");
         }
 
+        @Test
+        @DisplayName("Test para verificar que se filtran los fantasmas por clase")
+        void testFilterGhostsByClass() {
+            
+            when(mockView.getGhostClass()).thenReturn(Ghost.Class.III);
+
+            List<Ghost> filteredGhosts = new ArrayList<>();
+            filteredGhosts.add(new Ghost("Fantasma C", Ghost.Class.III, Ghost.DangerLevel.ALTO, "Habilidad C"));
+
+            when(mockModel.filterGhostsByClass(Ghost.Class.III)).thenReturn(filteredGhosts);
+            controller.filterGhostsByClass();
+
+            verify(mockView).getGhostClass();
+            verify(mockModel).filterGhostsByClass(Ghost.Class.III);
+            verify(mockView).showAllGhosts(filteredGhosts);
+        }
+
 }
