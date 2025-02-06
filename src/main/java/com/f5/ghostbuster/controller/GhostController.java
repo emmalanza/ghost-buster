@@ -3,6 +3,7 @@ package com.f5.ghostbuster.controller;
 import com.f5.ghostbuster.models.Ghost;
 import com.f5.ghostbuster.models.GhostBuster;
 import com.f5.ghostbuster.views.ConsoleView;
+import java.util.List;
 
 public class GhostController {
     private GhostBuster model;
@@ -14,17 +15,16 @@ public class GhostController {
     }
 
     public void captureGhost() {
-        // Usar el método createGhost() de la vista para obtener un nuevo fantasma
+       
         Ghost ghost = view.createGhost();
-
-        // Enviar el fantasma al modelo para que lo almacene
         model.captureGhost(ghost);
-
-        // Mostrar mensaje de éxito al usuario
-        view.showMessage("Fantasma \"" + ghost.getName() + "\" capturado exitosamente.");
+        view.showMessage("Fantasma \"" + ghost.getName() + "\" capturado exitosamente."); 
     }
 
-    
+    public void viewAllGhosts() {
+        List<Ghost> ghosts = model.getAllGhost();
+        view.showAllGhosts(ghosts);
+    }
 }
 
     

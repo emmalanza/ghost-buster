@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GhostControllerTest {
     
         //Mock  
@@ -48,7 +51,7 @@ public class GhostControllerTest {
         }
 
         @Test
-        @DisplayName("Verify that that the captured ghost list is displayed")
+        @DisplayName("Verify that  the captured ghost list is displayed")
 
         void testViewAllGhosts() {
 
