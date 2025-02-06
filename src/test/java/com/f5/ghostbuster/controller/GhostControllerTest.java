@@ -10,8 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +83,7 @@ public class GhostControllerTest {
             
             verify(mockView).getGhostId();
             verify(mockModel).freeGhost(1);
-            verify(mockView).showMessage("Fantasma liberado exitosamente.");
+            verify(mockView).showMessage("Fantasma  liberado exitosamente.");
         }
 
         @Test

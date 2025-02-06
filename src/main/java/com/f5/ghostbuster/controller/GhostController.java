@@ -4,6 +4,7 @@ import com.f5.ghostbuster.models.Ghost;
 import com.f5.ghostbuster.models.GhostBuster;
 import com.f5.ghostbuster.views.ConsoleView;
 import java.util.List;
+import java.time.LocalDate;
 
 public class GhostController {
     private GhostBuster model;
@@ -32,13 +33,19 @@ public class GhostController {
         if (success) {
             view.showMessage("Fantasma  liberado exitosamente."); 
         } else {
-            view.showMessage("Fantasma liberado exitosamente."); 
+            view.showMessage("Fantasma no encontrado."); 
         }
     }
 
     public void filterGhostsByClass() {
         Ghost.Class ghostClass = view.getGhostClass();
         List<Ghost> ghosts = model.filterGhostsByClass(ghostClass);
+        view.showAllGhosts(ghosts);
+    }
+
+    public void filterGhostsByDate() {
+        LocalDate date = view.getLocalDate();
+        List<Ghost> ghosts = model.filterGhostsByDate(date);
         view.showAllGhosts(ghosts);
     }
 }
