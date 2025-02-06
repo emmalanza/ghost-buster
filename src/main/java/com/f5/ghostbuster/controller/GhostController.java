@@ -1,9 +1,12 @@
 package com.f5.ghostbuster.controller;
 
 
+import com.f5.ghostbuster.models.Ghost;
 import com.f5.ghostbuster.models.GhostBuster;
 import com.f5.ghostbuster.views.ConsoleView;
-import com.f5.ghostbuster.models.Ghost.Class;
+import java.util.List;
+import java.time.LocalDate;
+
 
 public class GhostController {
     private GhostBuster model;
@@ -16,21 +19,43 @@ public class GhostController {
 
     public void captureGhost() {
 
-        String name = view.getInput("Ingresa el nombre del fantasma: ");   
-        String classInput = view.getInput("Selecciona la clase de fantasma (I, II, III, IV): ");
-        String dangerLevel = view.getInput("Ingresa el nivel de peligro (BAJO, MEDIO, ALTO, CRITICO): ");
-        String ability = view.getInput("Ingresa la habilidad especial del fantasma: ");
-        
-        //Convertir la clase y el nivel de peligro a enum
+       
+        Ghost ghost = view.createGhost();
+        model.captureGhost(ghost);
+        view.showMessage("Fantasma \"" + ghost.getName() + "\" capturado exitosamente."); 
+    }
 
-        Class ghostClass = Class.valueOf(classInput);
-        
-        
+    public void viewAllGhosts() {
+        List<Ghost> ghosts = model.getAllGhost();
+        view.showAllGhosts(ghosts);
+    }
 
-    
+    public void freeGhost() {
+        int id = view.getGhostId();
+        boolean success = model.freeGhost(id);
+        if (success) {
+            view.showMessage("Fantasma  liberado exitosamente."); 
+        } else {
+            view.showMessage("Fantasma no encontrado."); 
+        }
+    }
+
+    public void filterGhostsByClass() {
+        Ghost.Class ghostClass = view.getGhostClass();
+        List<Ghost> ghosts = model.filterGhostsByClass(ghostClass);
+        view.showAllGhosts(ghosts);
+    }
+
+    public void filterGhostsByDate() {
+        LocalDate date = view.getLocalDate();
+        List<Ghost> ghosts = model.filterGhostsByDate(date);
+        view.showAllGhosts(ghosts);
+    }
 }
 
 
+
 }
+
     
 
