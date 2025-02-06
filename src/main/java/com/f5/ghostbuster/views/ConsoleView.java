@@ -1,13 +1,10 @@
 package com.f5.ghostbuster.views;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Scanner;
 
 import com.f5.ghostbuster.models.Ghost;
 
-public class ConsoleView {
-    private Scanner scanner = new Scanner(System.in);
+public interface ConsoleView {
 
     public int showMenu() {
         System.out.println("============================================");
@@ -112,3 +109,6 @@ public class ConsoleView {
     }
 
 }
+
+
+

@@ -1,6 +1,7 @@
 package com.f5.ghostbuster.controller;
 
 import com.f5.ghostbuster.models.Ghost;
+
 import com.f5.ghostbuster.controller.GhostController;
 import com.f5.ghostbuster.models.Ghost.Class;
 import com.f5.ghostbuster.models.GhostBuster;
@@ -122,3 +123,4 @@ public class GhostControllerTest {
         }
 
 }
+

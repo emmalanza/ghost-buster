@@ -1,10 +1,12 @@
 package com.f5.ghostbuster.controller;
 
+
 import com.f5.ghostbuster.models.Ghost;
 import com.f5.ghostbuster.models.GhostBuster;
 import com.f5.ghostbuster.views.ConsoleView;
 import java.util.List;
 import java.time.LocalDate;
+
 
 public class GhostController {
     private GhostBuster model;
@@ -16,6 +18,7 @@ public class GhostController {
     }
 
     public void captureGhost() {
+
        
         Ghost ghost = view.createGhost();
         model.captureGhost(ghost);
@@ -48,6 +51,10 @@ public class GhostController {
         List<Ghost> ghosts = model.filterGhostsByDate(date);
         view.showAllGhosts(ghosts);
     }
+}
+
+
+
 }
 
     
