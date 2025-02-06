@@ -30,9 +30,9 @@ public class GhostController {
         int id = view.getGhostId();
         boolean success = model.freeGhost(id);
         if (success) {
-            view.showMessage("Fantasma con ID " + id + " liberado exitosamente."); 
+            view.showMessage("Fantasma  liberado exitosamente."); 
         } else {
-            view.showMessage("Fantasma con ID " + id + " no encontrado."); 
+            view.showMessage("Fantasma liberado exitosamente."); 
         }
     }
 

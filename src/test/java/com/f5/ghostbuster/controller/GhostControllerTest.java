@@ -101,4 +101,22 @@ public class GhostControllerTest {
             verify(mockView).showAllGhosts(filteredGhosts);
         }
 
+        @Test
+        @DisplayName("Verify that the ghosts are filtered by date")
+        void testFilterGhostsByDate() {
+            LocalDate date = LocalDate.of(2023, 3, 20);
+            when(mockView.getLocalDate()).thenReturn(date);
+
+            List<Ghost> filteredGhosts = new ArrayList<>();
+            filteredGhosts.add(new Ghost("Fantasma D", Ghost.Class.IV, Ghost.DangerLevel.CRITICO, "Habilidad D"));
+
+            when(mockModel.filterGhostsByDate(date)).thenReturn(filteredGhosts);
+
+            controller.filterGhostsByDate();
+
+            verify(mockView).getLocalDate();
+            verify(mockModel).filterGhostsByDate(date);
+            verify(mockView).showAllGhosts(filteredGhosts);
+        }
+
 }
