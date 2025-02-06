@@ -25,6 +25,16 @@ public class GhostController {
         List<Ghost> ghosts = model.getAllGhost();
         view.showAllGhosts(ghosts);
     }
+
+    public void freeGhost() {
+        int id = view.getGhostId();
+        boolean success = model.freeGhost(id);
+        if (success) {
+            view.showMessage("Fantasma con ID " + id + " liberado exitosamente."); 
+        } else {
+            view.showMessage("Fantasma con ID " + id + " no encontrado."); 
+        }
+    }
 }
 
     
