@@ -24,7 +24,7 @@ public class GhostController {
         view.showMessage("Fantasma \"" + ghost.getName() + "\" capturado exitosamente.");
     }
 
-    // Otros métodos...
+    
 }
 
     

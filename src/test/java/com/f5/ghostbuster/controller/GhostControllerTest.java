@@ -46,4 +46,22 @@ public class GhostControllerTest {
             // Verificar que se mostró el mensaje correcto al usuario
             verify(mockView).showMessage(eq("Fantasma \"Fantasma Prueba\" capturado exitosamente."));
         }
+
+        @Test
+        @DisplayName("Verify that that the captured ghost list is displayed")
+
+        void testViewAllGhosts() {
+
+            List<Ghost> ghosts = new ArrayList<>();
+            ghosts.add(new Ghost("Fantasma A", Ghost.Class.IV, Ghost.DangerLevel.ALTO, "Habilidad A"));
+            ghosts.add(new Ghost("Fantasma B", Ghost.Class.II, Ghost.DangerLevel.MEDIO, "Habilidad B"));
+
+            when(mockModel.getAllGhost()).thenReturn(ghosts);
+
+            controller.viewAllGhosts();
+
+            verify(mockModel).getAllGhost();
+
+            verify(mockView).showAllGhosts(ghosts);
     }
+}
