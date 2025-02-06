@@ -1,11 +1,14 @@
 package com.f5.ghostbuster.views;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
+
 
 import com.f5.ghostbuster.models.Ghost;
 
-public interface ConsoleView {
-
+public class ConsoleView {
+private Scanner scanner = new Scanner(System.in);
     public int showMenu() {
         System.out.println("============================================");
         System.out.println("¡Bienvenido a la Base Ghostbusters Asturias!");

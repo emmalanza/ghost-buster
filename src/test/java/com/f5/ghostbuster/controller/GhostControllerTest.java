@@ -2,21 +2,22 @@ package com.f5.ghostbuster.controller;
 
 import com.f5.ghostbuster.models.Ghost;
 
-import com.f5.ghostbuster.controller.GhostController;
-import com.f5.ghostbuster.models.Ghost.Class;
+
 import com.f5.ghostbuster.models.GhostBuster;
 import com.f5.ghostbuster.views.ConsoleView;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class GhostControllerTest {
     
