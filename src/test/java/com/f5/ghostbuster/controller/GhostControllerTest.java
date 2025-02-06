@@ -64,7 +64,24 @@ public class GhostControllerTest {
             controller.viewAllGhosts();
 
             verify(mockModel).getAllGhost();
-
             verify(mockView).showAllGhosts(ghosts);
     }
+
+        @Test
+        @DisplayName("Verify that the ghost is released correctly")
+            void testFreeGhost() {
+            // Configurar el comportamiento del mock de la vista
+            when(mockView.getGhostId()).thenReturn(1);
+
+            // Configurar el comportamiento del mock del modelo
+            when(mockModel.freeGhost(1)).thenReturn(true);
+            
+            controller.freeGhost();
+
+            
+            verify(mockView).getGhostId();
+            verify(mockModel).freeGhost(1);
+            verify(mockView).showMessage("Fantasma liberado exitosamente.");
+        }
+
 }
