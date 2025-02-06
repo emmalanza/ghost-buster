@@ -25,22 +25,5 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-</dependencies>
-
-<pluginRepositories>
-    <pluginRepository>
-        <id>atlassian-public</id>
-        <url>https://packages.atlassian.com/maven/repository/public</url>
-    </pluginRepository>
-</pluginRepositories>
-
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.openclover</groupId>
-            <artifactId>clover-maven-plugin</artifactId>
-            <version>4.4.1</version>
-        </plugin>
-    </plugins>
-</build>
+  </dependencies>
 </project>
