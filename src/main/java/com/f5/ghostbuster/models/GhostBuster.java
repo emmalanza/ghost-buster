@@ -17,11 +17,9 @@ public class GhostBuster {
         return ghosts.removeIf(ghost -> ghost.getId() == id);
     }
     public List<Ghost> filterGhostsByClass(Ghost.Class ghostClass) {
-
         return ghosts.stream().filter(ghost -> ghost.getGhostClass() == ghostClass).toList();
     }
     public List<Ghost> filterGhostsByDate(LocalDate date) {
-        
         return ghosts.stream().filter(ghost -> ghost.getDateOfCapture().equals(date)).toList();
     }
 

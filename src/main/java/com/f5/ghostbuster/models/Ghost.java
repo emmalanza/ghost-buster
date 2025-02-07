@@ -29,6 +29,13 @@ public class Ghost {
         this.captureDate = LocalDate.now();
     }
 
+    @Override
+    public String toString() {
+        return String.format("%-4d %-30s %-15s %-10s %-10s",
+        id, name, ghostClass, dangerLevel, captureDate);
+    }
+    
+
     public int getId() {
         return id;
     }
