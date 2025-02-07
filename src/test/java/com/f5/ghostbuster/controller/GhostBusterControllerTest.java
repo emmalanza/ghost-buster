@@ -123,4 +123,16 @@ public class GhostBusterControllerTest {
 
     }
 
+    @Test
+    @DisplayName("Verify message try to release a ghost that does not exist")
+    void testFreeGhostGhostNotFound() {
+
+        when(mockView.getGhostId()).thenReturn(1);
+        when(mockModel.freeGhost(1)).thenReturn(false);
+
+        controller.freeGhost();
+
+        verify(mockView).showMessage("Fantasma no encontrado.");
+    }
+
 }
