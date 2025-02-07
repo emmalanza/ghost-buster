@@ -19,14 +19,14 @@ import org.junit.jupiter.api.Test;
 
 public class GhostBusterControllerTest {
 
-    // Mock
+   
     private GhostBuster mockModel;
     private ConsoleView mockView;
     private GhostBusterController controller;
 
     @BeforeEach
     void setUp() {
-        
+
         mockModel = mock(GhostBuster.class);
         mockView = mock(ConsoleView.class);
         controller = new GhostBusterController(mockModel, mockView);
@@ -36,19 +36,12 @@ public class GhostBusterControllerTest {
     @DisplayName("Test para verificar que se muestra el mensaje correcto al capturar un fantasma")
     void testCaptureGhostDisplaysCorrectMessage() {
 
-        
         Ghost ghost = new Ghost("Fantasma Prueba", Ghost.Class.IV, Ghost.DangerLevel.ALTO, "Telequinesis");
 
-        
         when(mockView.createGhost()).thenReturn(ghost);
-
-        
         controller.captureGhost();
 
-        
         verify(mockModel).captureGhost(ghost);
-
-        
         verify(mockView).showMessage(eq("Fantasma \"Fantasma Prueba\" capturado exitosamente."));
     }
 
@@ -72,10 +65,9 @@ public class GhostBusterControllerTest {
     @Test
     @DisplayName("Verify that the ghost is released correctly")
     void testFreeGhost() {
-        
+
         when(mockView.getGhostId()).thenReturn(1);
 
-        
         when(mockModel.freeGhost(1)).thenReturn(true);
 
         controller.freeGhost();
@@ -118,6 +110,17 @@ public class GhostBusterControllerTest {
         verify(mockView).getLocalDate();
         verify(mockModel).filterGhostsByDate(date);
         verify(mockView).showAllGhosts(filteredGhosts);
+    }
+
+    @Test
+    @DisplayName("Verify message when no ghosts are captured")
+    void testViewAllGhostsNoGhosts() {
+
+        when(mockModel.getAllGhost()).thenReturn(new ArrayList<>());
+        controller.viewAllGhosts();
+
+        verify(mockModel).getAllGhost();
+
     }
 
 }
