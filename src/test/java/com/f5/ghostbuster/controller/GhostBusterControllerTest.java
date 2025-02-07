@@ -135,4 +135,16 @@ public class GhostBusterControllerTest {
         verify(mockView).showMessage("Fantasma no encontrado.");
     }
 
+    @Test
+    @DisplayName("Verify message when no ghosts are found by class filter")
+    void testFilterGhostsByClassNoGhosts() {
+        
+        when(mockView.getGhostClass()).thenReturn(Ghost.Class.III);
+        when(mockModel.filterGhostsByClass(Ghost.Class.III)).thenReturn(new ArrayList<>());
+
+        controller.filterGhostsByClass();
+
+        verify(mockView).showMessage("No se encontraron fantasmas de la clase III");
+    }
+
 }
