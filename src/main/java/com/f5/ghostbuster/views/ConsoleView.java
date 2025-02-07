@@ -1,9 +1,9 @@
 package com.f5.ghostbuster.views;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
-
 
 import com.f5.ghostbuster.models.Ghost;
 
@@ -25,13 +25,14 @@ private Scanner scanner = new Scanner(System.in);
     }
     
     public Ghost createGhost() {
-
         scanner.nextLine();
-        System.out.print("Ingresa el name del fantasma:");
+        System.out.print("Ingresa el nombre del fantasma:");
         String name = scanner.nextLine();
 
         Ghost.Class ghostClass = getGhostClass();
+        scanner.nextLine();
         Ghost.DangerLevel dangerLevel = getDangerLevel();
+        scanner.nextLine();
 
         System.out.print("Habilidad especial:");
         String ability = scanner.nextLine();
@@ -41,7 +42,9 @@ private Scanner scanner = new Scanner(System.in);
 
     public int getGhostId() {
         System.out.print("Ingrese el ID del fantasma: ");
-        return scanner.nextInt();
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        return id;
     }
 
     public void showAllGhosts(List<Ghost> ghosts) {
@@ -69,7 +72,7 @@ private Scanner scanner = new Scanner(System.in);
             ghostClassInput = scanner.nextInt();
         }
 
-        return Ghost.Class.values()[ghostClassInput];
+        return Ghost.Class.values()[ghostClassInput - 1];
     }
 
     public Ghost.DangerLevel getDangerLevel(){
@@ -90,25 +93,35 @@ private Scanner scanner = new Scanner(System.in);
 
     public LocalDate getLocalDate(){
         System.out.println("Ingresa una fecha para ver los fantsmas capturados ese día (AAAA-MM-DD):");
-        return LocalDate.parse(scanner.nextLine());
-
+        String date = scanner.nextLine();
+        while (!validateDate(date)) { 
+            System.out.println("La fecha ingresada no es válida. Por favor, usa el formato AAAA-MM-DD.");
+            date = scanner.nextLine();   
+        }
+        return LocalDate.parse(date);
     }
 
     private boolean validateGhostClass(int input) {
-        if((input - 1) > Ghost.Class.values().length) {
+        if(input > Ghost.Class.values().length || input <= 0) {
             return false;
         }
-        
         return true;
-
     }
+
     private boolean validateDangerLevel(int input) {
-        if((input - 1) > Ghost.DangerLevel.values().length) {
+        if(input  > Ghost.DangerLevel.values().length || input <= 0) {
             return false;
         }
-        
         return true;
+    }
 
+    private boolean validateDate(String input){
+        try {
+            LocalDate.parse(input);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
 }
