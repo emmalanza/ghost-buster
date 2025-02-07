@@ -6,6 +6,7 @@ import com.f5.ghostbuster.views.ConsoleView;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -19,14 +20,13 @@ import org.junit.jupiter.api.Test;
 
 public class GhostBusterControllerTest {
 
-    // Mock
     private GhostBuster mockModel;
     private ConsoleView mockView;
     private GhostBusterController controller;
 
     @BeforeEach
     void setUp() {
-        
+
         mockModel = mock(GhostBuster.class);
         mockView = mock(ConsoleView.class);
         controller = new GhostBusterController(mockModel, mockView);
@@ -36,19 +36,12 @@ public class GhostBusterControllerTest {
     @DisplayName("Test para verificar que se muestra el mensaje correcto al capturar un fantasma")
     void testCaptureGhostDisplaysCorrectMessage() {
 
-        
         Ghost ghost = new Ghost("Fantasma Prueba", Ghost.Class.IV, Ghost.DangerLevel.ALTO, "Telequinesis");
 
-        
         when(mockView.createGhost()).thenReturn(ghost);
-
-        
         controller.captureGhost();
 
-        
         verify(mockModel).captureGhost(ghost);
-
-        
         verify(mockView).showMessage(eq("Fantasma \"Fantasma Prueba\" capturado exitosamente."));
     }
 
@@ -72,10 +65,9 @@ public class GhostBusterControllerTest {
     @Test
     @DisplayName("Verify that the ghost is released correctly")
     void testFreeGhost() {
-        
+
         when(mockView.getGhostId()).thenReturn(1);
 
-        
         when(mockModel.freeGhost(1)).thenReturn(true);
 
         controller.freeGhost();
@@ -118,6 +110,77 @@ public class GhostBusterControllerTest {
         verify(mockView).getLocalDate();
         verify(mockModel).filterGhostsByDate(date);
         verify(mockView).showAllGhosts(filteredGhosts);
+    }
+
+    @Test
+    @DisplayName("Verify message when no ghosts are captured")
+    void testViewAllGhostsNoGhosts() {
+
+        when(mockModel.getAllGhost()).thenReturn(new ArrayList<>());
+        controller.viewAllGhosts();
+
+        verify(mockModel).getAllGhost();
+
+    }
+
+    @Test
+    @DisplayName("Verify message try to release a ghost that does not exist")
+    void testFreeGhostGhostNotFound() {
+
+        when(mockView.getGhostId()).thenReturn(1);
+        when(mockModel.freeGhost(1)).thenReturn(false);
+
+        controller.freeGhost();
+
+        verify(mockView).showMessage("Fantasma no encontrado.");
+    }
+
+    @Test
+    @DisplayName("Verify message when no ghosts are found by class filter")
+    void testFilterGhostsByClassNoGhosts() {
+
+        when(mockView.getGhostClass()).thenReturn(Ghost.Class.III);
+        when(mockModel.filterGhostsByClass(Ghost.Class.III)).thenReturn(new ArrayList<>());
+
+        controller.filterGhostsByClass();
+
+        verify(mockView).showMessage("No se encontraron fantasmas de la clase III");
+    }
+
+    @Test
+    @DisplayName("Verify message when no ghosts are found by date filter")
+    void testFilterGhostsByDateNoGhosts() {
+
+        LocalDate date = LocalDate.of(2023, 3, 20);
+        when(mockView.getLocalDate()).thenReturn(date);
+        when(mockModel.filterGhostsByDate(date)).thenReturn(new ArrayList<>());
+
+        controller.filterGhostsByDate();
+
+        verify(mockView).showMessage("No se encontraron fantasma capturados el día: " + date);
+    }
+
+    @Test
+    @DisplayName("Verify that the menu loop processes options correctly")
+    void testRunMethod() {
+       
+        when(mockView.showMenu()).thenReturn(1, 2, 6);
+
+        
+        Ghost ghost = new Ghost("Fantasma Test", Ghost.Class.IV, Ghost.DangerLevel.ALTO, "Telequinesis");
+        when(mockView.createGhost()).thenReturn(ghost);
+        when(mockModel.getAllGhost()).thenReturn(List.of(ghost));
+
+       
+        controller.run();
+
+        
+        verify(mockView, times(3)).showMenu();
+        verify(mockView).createGhost();
+        verify(mockModel).captureGhost(ghost);
+        verify(mockModel).getAllGhost();
+        verify(mockView).showAllGhosts(List.of(ghost));
+        verify(mockView).showMessage("¡Hasta luego!");
     }
 
 }

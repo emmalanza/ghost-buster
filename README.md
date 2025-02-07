@@ -70,17 +70,17 @@ La base de operaciones está en un viejo almacén industrial en Avilés, acondic
 
 Clonar el Repositorio:
 ```bash
-git clone https://github.com/emmalanza/ghostbusters-asturias.git
+git clone https://github.com/emmalanza/ghost-buster
 ```
 
 Navegar al Directorio del Proyecto:
 ```bash
-cd ghostbusters-asturias
+cd ghost-buster
 ```
 
 Compilar el Proyecto:
 ```bash
-javac -d bin src/com/f5/ghostbuster/**/*.java
+javac -d bin src/com/f5/ghostbuster/App.java
 ```
 
 Ejecutar el Proyecto:

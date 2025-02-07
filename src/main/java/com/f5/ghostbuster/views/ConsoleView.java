@@ -8,22 +8,41 @@ import java.util.Scanner;
 import com.f5.ghostbuster.models.Ghost;
 
 public class ConsoleView {
-private Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
+
     public int showMenu() {
-        System.out.println("============================================");
-        System.out.println("¡Bienvenido a la Base Ghostbusters Asturias!");
-        System.out.println("Captura y gestiona tus fantasmas atrapados y protege la región");
-        System.out.println("============================================");
-        System.out.println("1. Capturar un nuevo fantasma");
-        System.out.println("2. Ver lista de fantasmas capturados");
-        System.out.println("3. Liberar un fantasma");
-        System.out.println("4. Filtrar fantasmas por clase");
-        System.out.println("5. Filtrar fantasmas por fecha");
-        System.out.println("6. Salir");
-        System.out.print("Selecciona una opción: ");
-        return scanner.nextInt();
+        int option = -1;
+        boolean valid = false;
+
+        while (!valid) {
+            try {
+                System.out.println("============================================");
+                System.out.println("¡Bienvenido a la Base Ghostbusters Asturias!");
+                System.out.println("Captura y gestiona tus fantasmas atrapados y protege la región");
+                System.out.println("============================================");
+                System.out.println("1. Capturar un nuevo fantasma");
+                System.out.println("2. Ver lista de fantasmas capturados");
+                System.out.println("3. Liberar un fantasma");
+                System.out.println("4. Filtrar fantasmas por clase");
+                System.out.println("5. Filtrar fantasmas por fecha");
+                System.out.println("6. Salir");
+                System.out.print("Selecciona una opción: ");
+
+                if (scanner.hasNextInt()) {
+                    option = scanner.nextInt();
+                    valid = true; 
+                } else {
+                    System.out.println("Entrada inválida. Por favor, ingresa un número.");
+                    scanner.next(); 
+                }
+            } catch (Exception e) {
+                System.out.println("Error al leer la entrada. Inténtalo nuevamente.");
+                scanner.next(); 
+            }
+        }
+        return option;
     }
-    
+
     public Ghost createGhost() {
         scanner.nextLine();
         System.out.print("Ingresa el nombre del fantasma:");
@@ -59,11 +78,11 @@ private Scanner scanner = new Scanner(System.in);
         System.out.println(message);
     }
 
-    public Ghost.Class getGhostClass(){
+    public Ghost.Class getGhostClass() {
 
         System.out.println("Selecciona la clase del fantasma:");
         for (Ghost.Class c : Ghost.Class.values()) {
-            System.out.println((c.ordinal() + 1) + ". " + c); 
+            System.out.println((c.ordinal() + 1) + ". " + c);
         }
 
         int ghostClassInput = scanner.nextInt();
@@ -75,7 +94,7 @@ private Scanner scanner = new Scanner(System.in);
         return Ghost.Class.values()[ghostClassInput - 1];
     }
 
-    public Ghost.DangerLevel getDangerLevel(){
+    public Ghost.DangerLevel getDangerLevel() {
 
         System.out.println("Selecciona el nivel de peligro:");
         for (Ghost.DangerLevel dangerLevel : Ghost.DangerLevel.values()) {
@@ -91,31 +110,31 @@ private Scanner scanner = new Scanner(System.in);
         return Ghost.DangerLevel.values()[dangerLevelInput - 1];
     }
 
-    public LocalDate getLocalDate(){
+    public LocalDate getLocalDate() {
         System.out.println("Ingresa una fecha para ver los fantsmas capturados ese día (AAAA-MM-DD):");
         String date = scanner.nextLine();
-        while (!validateDate(date)) { 
+        while (!validateDate(date)) {
             System.out.println("La fecha ingresada no es válida. Por favor, usa el formato AAAA-MM-DD.");
-            date = scanner.nextLine();   
+            date = scanner.nextLine();
         }
         return LocalDate.parse(date);
     }
 
     private boolean validateGhostClass(int input) {
-        if(input > Ghost.Class.values().length || input <= 0) {
+        if (input > Ghost.Class.values().length || input <= 0) {
             return false;
         }
         return true;
     }
 
     private boolean validateDangerLevel(int input) {
-        if(input  > Ghost.DangerLevel.values().length || input <= 0) {
+        if (input > Ghost.DangerLevel.values().length || input <= 0) {
             return false;
         }
         return true;
     }
 
-    private boolean validateDate(String input){
+    private boolean validateDate(String input) {
         try {
             LocalDate.parse(input);
             return true;
@@ -125,6 +144,3 @@ private Scanner scanner = new Scanner(System.in);
     }
 
 }
-
-
-
