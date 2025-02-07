@@ -26,7 +26,7 @@ public class GhostBusterControllerTest {
 
     @BeforeEach
     void setUp() {
-        // Creamos los mocks y el controlador antes de cada prueba
+        
         mockModel = mock(GhostBuster.class);
         mockView = mock(ConsoleView.class);
         controller = new GhostBusterController(mockModel, mockView);
@@ -36,19 +36,19 @@ public class GhostBusterControllerTest {
     @DisplayName("Test para verificar que se muestra el mensaje correcto al capturar un fantasma")
     void testCaptureGhostDisplaysCorrectMessage() {
 
-        // Crear un objeto fantasma para simular la entrada del usuario
+        
         Ghost ghost = new Ghost("Fantasma Prueba", Ghost.Class.IV, Ghost.DangerLevel.ALTO, "Telequinesis");
 
-        // Configurar el comportamiento del mock de la vista
+        
         when(mockView.createGhost()).thenReturn(ghost);
 
-        // Llamar al método captureGhost
+        
         controller.captureGhost();
 
-        // Verificar que el fantasma fue capturado en el modelo
+        
         verify(mockModel).captureGhost(ghost);
 
-        // Verificar que se mostró el mensaje correcto al usuario
+        
         verify(mockView).showMessage(eq("Fantasma \"Fantasma Prueba\" capturado exitosamente."));
     }
 
@@ -72,10 +72,10 @@ public class GhostBusterControllerTest {
     @Test
     @DisplayName("Verify that the ghost is released correctly")
     void testFreeGhost() {
-        // Configurar el comportamiento del mock de la vista
+        
         when(mockView.getGhostId()).thenReturn(1);
 
-        // Configurar el comportamiento del mock del modelo
+        
         when(mockModel.freeGhost(1)).thenReturn(true);
 
         controller.freeGhost();
