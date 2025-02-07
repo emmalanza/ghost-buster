@@ -5,7 +5,6 @@ import com.f5.ghostbuster.models.GhostBuster;
 import com.f5.ghostbuster.views.ConsoleView;
 
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
