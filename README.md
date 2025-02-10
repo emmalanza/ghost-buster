@@ -1,4 +1,4 @@
-# Ghostbusters en Asturias 👻
+# Ghostbusters en Asturias   👻
 
 
 ![Java](https://img.shields.io/badge/Java-21-blue)
@@ -15,7 +15,7 @@
 - [Tecnologías Utilizadas](#tecnologías-utilizadas)
 - [Autores](#autores)
 - [Contribuciones](#contribuciones)
-- [Licencia](#licencia)
+- [Licencia](#licenciaa)
 
 ---
 
