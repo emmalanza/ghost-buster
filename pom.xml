@@ -7,12 +7,59 @@
   <version>1.0-SNAPSHOT</version>
   <name>ghostbuster</name>
   <url>http://maven.apache.org</url>
-  <dependencies>
+  <dependencies>    
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-library</artifactId>
+      <version>2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.7.0</version>
       <scope>test</scope>
     </dependency>
-  </dependencies>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>LATEST</version>
+      <scope>test</scope>
+    </dependency>
+</dependencies>
+
+<pluginRepositories>
+    <pluginRepository>
+        <id>atlassian-public</id>
+        <url>https://packages.atlassian.com/maven/repository/public</url>
+    </pluginRepository>
+</pluginRepositories>
+
+<build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+            <mainClass>com.f5.ghostbuster.App</mainClass>
+        </configuration>
+        <executions>
+            <execution>
+                <goals>
+                    <goal>java</goal>
+                </goals>
+            </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+          <groupId>org.openclover</groupId>
+          <artifactId>clover-maven-plugin</artifactId>
+          <version>4.4.1</version>
+      </plugin>
+
+    </plugins>
+</build>
+
 </project>
