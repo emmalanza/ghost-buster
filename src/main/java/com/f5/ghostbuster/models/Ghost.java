@@ -20,7 +20,7 @@ public class Ghost {
     private String ability;
     private LocalDate captureDate;
 
-       public Ghost(String name, Class ghostClass, DangerLevel dangerLevel, String ability) {
+    public Ghost(String name, Class ghostClass, DangerLevel dangerLevel, String ability) {
         this.id = ++counter;
         this.name = name;
         this.ghostClass = ghostClass;
@@ -34,7 +34,6 @@ public class Ghost {
         return String.format("%-4d %-30s %-15s %-10s %-10s",
         id, name, ghostClass, dangerLevel, captureDate);
     }
-    
 
     public int getId() {
         return id;
