@@ -21,12 +21,8 @@ public class ConsoleView {
         System.out.println(message);
     }
 
-    public int showMenu() {
-        int option = -1;
-        boolean valid = false;
+    public void showMenu() {
 
-        while (!valid) {
-            try {
                 showMessage("============================================");
                 showMessage("¡Bienvenido a la Base Ghostbusters Asturias!");
                 showMessage("Captura y gestiona tus fantasmas atrapados y protege la región");
@@ -38,19 +34,11 @@ public class ConsoleView {
                 showMessage("5. Filtrar fantasmas por fecha");
                 showMessage("6. Salir");
                 System.out.print("Selecciona una opción: ");
-
-                if (scanner.hasNextInt()) {
-                    option = scanner.nextInt();
-                    valid = true; 
-                } else {
-                    showMessage("Entrada inválida. Por favor, ingresa un número.");
-                    scanner.next(); 
-                }
-            } catch (Exception e) {
-                showMessage("Error al leer la entrada. Inténtalo nuevamente.");
-                scanner.next(); 
-            }
-        }
+    }
+    
+    public int getOption(){
+        int option = scanner.nextInt();
+        scanner.nextLine();
         return option;
     }
 
