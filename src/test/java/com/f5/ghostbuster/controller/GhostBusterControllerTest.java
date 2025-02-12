@@ -1,186 +1,120 @@
 package com.f5.ghostbuster.controller;
 
-import com.f5.ghostbuster.models.Ghost;
+import com.f5.ghostbuster.models.dto.GhostDTO;
 import com.f5.ghostbuster.models.GhostBuster;
-import com.f5.ghostbuster.views.ConsoleView;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.*;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
+import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+class GhostBusterControllerTest {
 
-public class GhostBusterControllerTest {
+    @Mock
+    private GhostBuster model;  // Mockeamos el modelo
 
-    private GhostBuster mockModel;
-    private ConsoleView mockView;
     private GhostBusterController controller;
 
     @BeforeEach
     void setUp() {
-
-        mockModel = mock(GhostBuster.class);
-        mockView = mock(ConsoleView.class);
-        controller = new GhostBusterController(mockModel, mockView);
+        MockitoAnnotations.openMocks(this);  // Inicializamos los mocks
+        controller = new GhostBusterController(model);
     }
 
     @Test
-    @DisplayName("Test para verificar que se muestra el mensaje correcto al capturar un fantasma")
-    void testCaptureGhostDisplaysCorrectMessage() {
+    void testCaptureGhostSuccessfully() {
+        // Creamos el objeto GhostDTO para la prueba
+        GhostDTO ghostDTO = new GhostDTO("Casper", "I", "BAJO", "Invisibilidad");
 
-        Ghost ghost = new Ghost("Fantasma Prueba", Ghost.Class.IV, Ghost.DangerLevel.ALTO, "Telequinesis");
+        // Establecemos lo que el mock debería devolver cuando se le llame
+        when(model.captureGhost(ghostDTO)).thenReturn(true);
 
-        when(mockView.createGhost()).thenReturn(ghost);
-        controller.captureGhost();
+        // Llamamos al método del controlador
+        boolean result = controller.captureGhost(ghostDTO);
 
-        verify(mockModel).captureGhost(ghost);
-        verify(mockView).showMessage(eq("Fantasma \"Fantasma Prueba\" capturado exitosamente."));
+        // Comprobamos que el resultado es el esperado
+        assertTrue(result);
+
+        // Verificamos que el modelo recibió la llamada correctamente
+        verify(model).captureGhost(ghostDTO);
     }
 
     @Test
-    @DisplayName("Verify that  the captured ghost list is displayed")
+    void testCaptureGhostFailure() {
+        GhostDTO ghostDTO = new GhostDTO("Ghostly", "Scary", "High", "Teletrasnportacion");
+        when(model.captureGhost(ghostDTO)).thenReturn(false);
 
-    void testViewAllGhosts() {
-
-        List<Ghost> ghosts = new ArrayList<>();
-        ghosts.add(new Ghost("Fantasma A", Ghost.Class.IV, Ghost.DangerLevel.ALTO, "Habilidad A"));
-        ghosts.add(new Ghost("Fantasma B", Ghost.Class.II, Ghost.DangerLevel.MEDIO, "Habilidad B"));
-
-        when(mockModel.getAllGhost()).thenReturn(ghosts);
-
-        controller.viewAllGhosts();
-
-        verify(mockModel).getAllGhost();
-        verify(mockView).showAllGhosts(ghosts);
-    }
-
-    @Test
-    @DisplayName("Verify that the ghost is released correctly")
-    void testFreeGhost() {
-
-        when(mockView.getGhostId()).thenReturn(1);
-
-        when(mockModel.freeGhost(1)).thenReturn(true);
-
-        controller.freeGhost();
-
-        verify(mockView).getGhostId();
-        verify(mockModel).freeGhost(1);
-        verify(mockView).showMessage("Fantasma  liberado exitosamente.");
-    }
-
-    @Test
-    @DisplayName("Verify that the ghosts are filtered by class")
-    void testFilterGhostsByClass() {
-
-        when(mockView.getGhostClass()).thenReturn(Ghost.Class.III);
-
-        List<Ghost> filteredGhosts = new ArrayList<>();
-        filteredGhosts.add(new Ghost("Fantasma C", Ghost.Class.III, Ghost.DangerLevel.ALTO, "Habilidad C"));
-
-        when(mockModel.filterGhostsByClass(Ghost.Class.III)).thenReturn(filteredGhosts);
-        controller.filterGhostsByClass();
-
-        verify(mockView).getGhostClass();
-        verify(mockModel).filterGhostsByClass(Ghost.Class.III);
-        verify(mockView).showAllGhosts(filteredGhosts);
-    }
-
-    @Test
-    @DisplayName("Verify that the ghosts are filtered by date")
-    void testFilterGhostsByDate() {
-        LocalDate date = LocalDate.of(2023, 3, 20);
-        when(mockView.getLocalDate()).thenReturn(date);
-
-        List<Ghost> filteredGhosts = new ArrayList<>();
-        filteredGhosts.add(new Ghost("Fantasma D", Ghost.Class.IV, Ghost.DangerLevel.CRITICO, "Habilidad D"));
-
-        when(mockModel.filterGhostsByDate(date)).thenReturn(filteredGhosts);
-
-        controller.filterGhostsByDate();
-
-        verify(mockView).getLocalDate();
-        verify(mockModel).filterGhostsByDate(date);
-        verify(mockView).showAllGhosts(filteredGhosts);
-    }
-
-    @Test
-    @DisplayName("Verify message when no ghosts are captured")
-    void testViewAllGhostsNoGhosts() {
-
-        when(mockModel.getAllGhost()).thenReturn(new ArrayList<>());
-        controller.viewAllGhosts();
-
-        verify(mockModel).getAllGhost();
-
-    }
-
-    @Test
-    @DisplayName("Verify message try to release a ghost that does not exist")
-    void testFreeGhostGhostNotFound() {
-
-        when(mockView.getGhostId()).thenReturn(1);
-        when(mockModel.freeGhost(1)).thenReturn(false);
-
-        controller.freeGhost();
-
-        verify(mockView).showMessage("Fantasma no encontrado.");
-    }
-
-    @Test
-    @DisplayName("Verify message when no ghosts are found by class filter")
-    void testFilterGhostsByClassNoGhosts() {
-
-        when(mockView.getGhostClass()).thenReturn(Ghost.Class.III);
-        when(mockModel.filterGhostsByClass(Ghost.Class.III)).thenReturn(new ArrayList<>());
-
-        controller.filterGhostsByClass();
-
-        verify(mockView).showMessage("No se encontraron fantasmas de la clase III");
-    }
-
-    @Test
-    @DisplayName("Verify message when no ghosts are found by date filter")
-    void testFilterGhostsByDateNoGhosts() {
-
-        LocalDate date = LocalDate.of(2023, 3, 20);
-        when(mockView.getLocalDate()).thenReturn(date);
-        when(mockModel.filterGhostsByDate(date)).thenReturn(new ArrayList<>());
-
-        controller.filterGhostsByDate();
-
-        verify(mockView).showMessage("No se encontraron fantasma capturados el día: " + date);
-    }
-
-    @Test
-    @DisplayName("Verify that the menu loop processes options correctly")
-    void testRunMethod() {
-       
-        when(mockView.showMenu()).thenReturn(1, 2, 6);
-
+        boolean result = controller.captureGhost(ghostDTO);
         
-        Ghost ghost = new Ghost("Fantasma Test", Ghost.Class.IV, Ghost.DangerLevel.ALTO, "Telequinesis");
-        when(mockView.createGhost()).thenReturn(ghost);
-        when(mockModel.getAllGhost()).thenReturn(List.of(ghost));
-
-       
-        controller.run();
-
-        
-        verify(mockView, times(3)).showMenu();
-        verify(mockView).createGhost();
-        verify(mockModel).captureGhost(ghost);
-        verify(mockModel).getAllGhost();
-        verify(mockView).showAllGhosts(List.of(ghost));
-        verify(mockView).showMessage("¡Hasta luego!");
+        assertFalse(result);
+        verify(model).captureGhost(ghostDTO);
     }
 
+    @Test
+    void testGetAllGhostsWhenEmpty() {
+        // Cuando no haya fantasmas en el modelo
+        when(model.getAllGhost()).thenReturn(Arrays.asList());
+
+        List<GhostDTO> ghosts = controller.getAllGhosts();
+
+        assertTrue(ghosts.isEmpty());  // Verificamos que la lista esté vacía
+    }
+
+    @Test
+    void testGetAllGhostsWhenNotEmpty() {
+        GhostDTO ghostDTO = new GhostDTO("Boo", "Friendly", "Medium", "Flying");
+        when(model.getAllGhost()).thenReturn(Arrays.asList(ghostDTO));
+
+        List<GhostDTO> ghosts = controller.getAllGhosts();
+
+        assertFalse(ghosts.isEmpty());  // Verificamos que la lista no esté vacía
+        assertEquals(1, ghosts.size());
+        assertEquals("Boo", ghosts.get(0).getName());
+    }
+
+    @Test
+    void testFilterGhostsByClassWhenFound() {
+        GhostDTO ghostDTO = new GhostDTO("Spooky", "I", "BAJO", "Invisibilidad");
+        when(model.filterGhostsByClass("I")).thenReturn(Arrays.asList(ghostDTO));
+
+        List<GhostDTO> filteredGhosts = controller.filterGhostsByClass("I");
+
+        assertFalse(filteredGhosts.isEmpty());
+        assertEquals("Spooky", filteredGhosts.get(0).getName());
+    }
+
+    @Test
+    void testFilterGhostsByClassWhenNotFound() {
+        when(model.filterGhostsByClass("Friendly")).thenReturn(Arrays.asList());
+
+        List<GhostDTO> filteredGhosts = controller.filterGhostsByClass("Friendly");
+
+        assertTrue(filteredGhosts.isEmpty());
+    }
+
+    @Test
+    void testFreeGhostSuccessfully() {
+        GhostDTO ghostDTO = new GhostDTO("Ghostly", "I", "ALTO", "Teletrasnportacion");
+        when(model.freeGhost(ghostDTO.getId())).thenReturn(true);
+
+        boolean result = controller.freeGhost(ghostDTO.getId());
+
+        assertTrue(result);
+        verify(model).freeGhost(ghostDTO.getId());
+    }
+
+    @Test
+    void testFreeGhostFailure() {
+        when(model.freeGhost(3)).thenReturn(false);
+
+        boolean result = controller.freeGhost(3);
+
+        assertFalse(result);
+        verify(model).freeGhost(3);
+    }
 }
