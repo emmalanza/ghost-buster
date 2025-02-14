@@ -10,3 +10,5 @@ public class App {
             homeView.setVisible(true);
         });
 
+    }
+}
