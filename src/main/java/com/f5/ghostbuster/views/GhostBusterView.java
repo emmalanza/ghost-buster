@@ -30,11 +30,11 @@ public class GhostBusterView extends JFrame {
     public JList<String> ghostList;
     public DefaultListModel<String> ghostListModel;
     public JScrollPane scrollPane;
-    private GhostBusterController controller;
 
-    public GhostBusterView (GhostBusterController controller) {
 
-        this.controller = controller;
+    public GhostBusterView (GhostBusterController ghostBusterController) {
+
+        GhostBusterController  controller = ghostBusterController;
 
         setTitle("Ghost Busters");
         setSize(670, 480);

@@ -1,7 +1,10 @@
 package com.f5.ghostbuster.views;
 
+import com.f5.ghostbuster.factory.GhostBusterFactory;
+
+
 import javax.swing.BorderFactory;
-import javax.swing.Box;
+
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class HomeView extends JFrame {
 
@@ -37,27 +41,27 @@ public class HomeView extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         add(mainPanel);
 
-        mainPanel.setLayout(new GridBagLayout()); // Para centrar los elementos
+        mainPanel.setLayout(new GridBagLayout()); 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.insets = new Insets(20, 0, 20, 0); // Espaciad
+        gbc.insets = new Insets(20, 0, 20, 0); 
 
         //Titulo
 
         JLabel titleLabel = new JLabel("GhostBuster");
         titleLabel.setFont(new Font("Serif", Font.BOLD, 48));
-        titleLabel.setForeground(new Color(199, 125, 243)); // Lila neón
+        titleLabel.setForeground(new Color(199, 125, 243)); 
         mainPanel.add(titleLabel, gbc);
 
         //Boton
         JButton newGameButton = new JButton("New Game");
         newGameButton.setFont(new Font("Arial", Font.BOLD, 30));
-        newGameButton.setForeground(new Color(255, 230, 0)); // Amarillo neón
-        newGameButton.setBackground(new Color(139, 0, 0)); // Rojo oscuro
+        newGameButton.setForeground(new Color(255, 230, 0)); 
+        newGameButton.setBackground(new Color(139, 0, 0)); 
         newGameButton.setPreferredSize(new Dimension(250, 60));
         newGameButton.setFocusPainted(false);
-        newGameButton.setContentAreaFilled(false); // Evita que el fondo por defecto sobreescriba el color
+        newGameButton.setContentAreaFilled(false); 
         newGameButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
         // Agregar bordes redondeados
@@ -74,10 +78,11 @@ public class HomeView extends JFrame {
                 super.paint(g2, c);
             }
 
+            
         });       
         
-        newGameButton.addActionListener(e -> {
-            new GhostBusterView();
+        newGameButton.addActionListener((ActionEvent e) -> {
+            new GhostBusterView(GhostBusterFactory.createController());
             dispose();
         });
 
