@@ -1,9 +1,6 @@
 package com.f5.ghostbuster.views;
 
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +15,7 @@ import javax.swing.JTextField;
 import com.f5.ghostbuster.controller.GhostBusterController;
 import com.f5.ghostbuster.views.listeners.CaptureGhostListener;
 import com.f5.ghostbuster.views.listeners.FreeGhostListener;
+import com.f5.ghostbuster.views.renderers.GhostRenderer;
 
 public class GhostBusterView extends JFrame {
 
@@ -82,13 +80,17 @@ public class GhostBusterView extends JFrame {
         bottomGbc.weightx = 0.7;
         bottomGbc.weighty = 0.7;
         bottomGbc.anchor = GridBagConstraints.CENTER;
-        bottomChildBox.setBackground(Color.decode("#D9D9D9"));
+        bottomChildBox.setBackground(Color.decode("#d3d3d3"));
         bottomContainer.add(bottomChildBox, bottomGbc);
 
         //Labels
         ghostImg = new ImageIcon(getClass().getResource("/ghostbuster/ghost.png"));
+        Image resizedImage = ghostImg.getImage().getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+        ghostImg = new ImageIcon(resizedImage);
         imgLabel = new JLabel(ghostImg);
         imageContainer.add(imgLabel);
+
+
 
         bottomChildBox.setLayout(new GridBagLayout());
 
@@ -108,44 +110,56 @@ public class GhostBusterView extends JFrame {
         
         abilitiesField = new JTextField();
         captureButton = new JButton("Capture ghost");
+        captureButton.setBackground(Color.decode("#ba181b"));
+        captureButton.setFont(new Font("Arial", Font.BOLD, 12));
+        captureButton.setForeground(new Color(255, 230, 0));
         
         GridBagConstraints boxGbc = new GridBagConstraints();
         boxGbc.fill = GridBagConstraints.BOTH;
-    
-        
-        bottomChildBox.add(ghostName);
+
+        boxGbc.gridx = 0;
+        boxGbc.gridy = 0;
+        boxGbc.insets = new Insets(3, 10, 3, 10);
+        bottomChildBox.add(ghostName, boxGbc);
         
         boxGbc.gridx = 0;
         boxGbc.gridy = 1;
+        boxGbc.weightx = 0.8;
 
         bottomChildBox.add(nameField, boxGbc);
 
-        bottomChildBox.add(ghostClass);
+        boxGbc.gridx = 1;
+        boxGbc.gridy = 0;
+
+        bottomChildBox.add(ghostClass, boxGbc);
 
         boxGbc.gridx = 1;
         boxGbc.gridy = 1;
 
         bottomChildBox.add(classBox, boxGbc);
 
+        boxGbc.gridx = 2;
+        boxGbc.gridy = 0;
 
-        bottomChildBox.add(ghostDanger);
+        bottomChildBox.add(ghostDanger, boxGbc);
         
         boxGbc.gridx = 2;
         boxGbc.gridy = 1;
-        
+
         bottomChildBox.add(dangerBox, boxGbc);
 
-        
-        bottomChildBox.add(ghostAbilities);
+        boxGbc.gridx = 3;
+        boxGbc.gridy = 0;
+
+        bottomChildBox.add(ghostAbilities, boxGbc);
 
         boxGbc.gridx = 3;
         boxGbc.gridy = 1;
-
         bottomChildBox.add(abilitiesField, boxGbc);
 
         boxGbc.gridx = 4;
         boxGbc.gridy = 1;
-
+        boxGbc.weightx = 0.2;
         bottomChildBox.add(captureButton, boxGbc);
         
         boxGbc.anchor = GridBagConstraints.CENTER;
@@ -155,8 +169,12 @@ public class GhostBusterView extends JFrame {
         ghostList = new JList<>(ghostListModel);
         scrollPane = new JScrollPane(ghostList);
         freeGhostButton = new JButton("Free Ghost");
+        freeGhostButton.setBackground(Color.decode("#ba181b"));
+        freeGhostButton.setFont(new Font("Arial", Font.BOLD, 12));
+        freeGhostButton.setForeground(new Color(255, 230, 0));
         leftContainer.add(scrollPane);
         leftContainer.add(freeGhostButton);
+
 
         captureButton.addActionListener(new CaptureGhostListener(this, controller));
         freeGhostButton.addActionListener(new FreeGhostListener(this, controller));
