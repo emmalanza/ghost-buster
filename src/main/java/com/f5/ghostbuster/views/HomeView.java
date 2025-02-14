@@ -23,7 +23,7 @@ public class HomeView extends JFrame {
         setVisible(true);
 
         JPanel mainPanel = new JPanel() {
-            private final Image backgroundImage = new ImageIcon(getClass().getResource("/images/background.jpg"))
+            private final Image backgroundImage = new ImageIcon(getClass().getResource("/ghostbuster/background.jpg"))
                     .getImage();
 
             @Override
@@ -77,7 +77,7 @@ public class HomeView extends JFrame {
         });       
         
         newGameButton.addActionListener(e -> {
-            // Cambia la referencia a la vista de GhostBusterView
+            new GhostBusterView();
             dispose();
         });
 
