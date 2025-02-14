@@ -1,5 +1,6 @@
 package com.f5.ghostbuster;
 
+
 import com.f5.ghostbuster.views.HomeView;
 
 public class App {
@@ -8,5 +9,4 @@ public class App {
             HomeView homeView = new HomeView();
             homeView.setVisible(true);
         });
-    }
-}
+
