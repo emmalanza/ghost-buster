@@ -1,11 +1,14 @@
 package com.f5.ghostbuster;
 
 
-import com.f5.ghostbuster.factory.GhostBusterFactory;
-import com.f5.ghostbuster.views.GhostBusterView;
+import com.f5.ghostbuster.views.HomeView;
 
 public class App {
     public static void main(String[] args) {
-        new GhostBusterView(GhostBusterFactory.createController());
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            HomeView homeView = new HomeView();
+            homeView.setVisible(true);
+        });
+
     }
 }
