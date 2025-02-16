@@ -15,7 +15,6 @@ import javax.swing.JTextField;
 import com.f5.ghostbuster.controller.GhostBusterController;
 import com.f5.ghostbuster.views.listeners.CaptureGhostListener;
 import com.f5.ghostbuster.views.listeners.FreeGhostListener;
-import com.f5.ghostbuster.views.renderers.GhostRenderer;
 
 public class GhostBusterView extends JFrame {
 
