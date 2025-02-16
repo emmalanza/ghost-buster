@@ -41,5 +41,5 @@ public class GhostDTO {
     public String getGhostClass() { return ghostClass; }
     public String getDangerLevel() { return dangerLevel; }
     public String getAbility() { return ability; }
-    public LocalDate getCaptureDate() {return captureDate;}
+
 }

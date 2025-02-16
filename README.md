@@ -1,21 +1,16 @@
-# Ghostbusters en Asturias   👻
-
-
-![Java](https://img.shields.io/badge/Java-21-blue)
-![JUnit](https://img.shields.io/badge/JUnit-Test-green)
-![Maven](https://img.shields.io/badge/Maven-Build-orange)
+# Ghostbusters en Asturias 👻
 
 ## Tabla de Contenidos
+
 - [Descripción](#descripción)
 - [Cómo Jugar](#cómo-jugar)
 - [Opciones del Jugador](#opciones-del-jugador)
 - [Instalación](#instalación)
 - [Uso](#uso)
-- [Ejemplo de Interacción](#ejemplo-de-interacción)
 - [Tecnologías Utilizadas](#tecnologías-utilizadas)
 - [Autores](#autores)
 - [Contribuciones](#contribuciones)
-- [Licencia](#licenciaa)
+- [Licencia](#licencia)
 
 ---
 
@@ -45,8 +40,7 @@ La base de operaciones está en un viejo almacén industrial en Avilés, acondic
 1. **Captura fantasmas** que rondan diferentes lugares de Asturias.
 2. **Consulta tu colección** para analizar características y planear estrategias.
 3. **Libera fantasmas** menos peligrosos si necesitas más espacio.
-4. **Filtra y estudia los fantasmas** por clase y fecha de captura.
-5. **Asegura la protección de Asturias** y conviértete en un legendario Ghostbuster.
+4. **Asegura la protección de Asturias** y conviértete en un legendario Ghostbuster.
 
 ---
 
@@ -55,35 +49,38 @@ La base de operaciones está en un viejo almacén industrial en Avilés, acondic
 1. Capturar un nuevo fantasma.
 2. Ver lista de fantasmas capturados.
 3. Liberar un fantasma.
-4. Filtrar fantasmas por clase.
-5. Ver fantasmas capturados en un mes.
-6. Salir del juego.
+4. Salir del juego.
 
 ---
 
 ## Instalación
 
 ### Prerrequisitos
+
 - **Java SE Development Kit (JDK) 11 o superior**. Descárgalo [aquí](https://www.oracle.com/java/technologies/javase-downloads.html).
 
 ### Pasos
 
 Clonar el Repositorio:
+
 ```bash
 git clone https://github.com/emmalanza/ghost-buster
 ```
 
 Navegar al Directorio del Proyecto:
+
 ```bash
 cd ghost-buster
 ```
 
 Compilar el Proyecto:
+
 ```bash
 javac -d bin src/com/f5/ghostbuster/App.java
 ```
 
 Ejecutar el Proyecto:
+
 ```bash
 java -cp bin com.f5.ghostbuster.Main
 ```
@@ -92,41 +89,24 @@ java -cp bin com.f5.ghostbuster.Main
 
 ## Uso
 
-Al iniciar el programa, se mostrará un menú con las opciones disponibles. Selecciona ingresando el número correspondiente y sigue las instrucciones.
+Al iniciar el programa, aparecerá una pantalla de bienvenida que permitirá acceder al juego. Dentro del juego, se mostrará un formulario para registrar los datos de los fantasmas y criaturas capturadas, los cuales se visualizarán en la parte izquierda de la pantalla. También habrá una opción para liberar fantasmas según la estrategia del jugador.
 
 ---
 
-## Ejemplo de Interacción
+### Ejemplo de lista de fantasmas capturados:
 
-```plaintext
-============================================
-    ¡Bienvenido a la Base Ghostbusters Asturias!
-============================================
-
-Opciones:
-1. Capturar un nuevo fantasma
-2. Ver lista de fantasmas capturados
-3. Liberar un fantasma
-4. Filtrar fantasmas por clase
-5. Ver fantasmas capturados en un mes
-6. Salir
-
-Por favor, selecciona una opción (1-6):
-```
-
-Ejemplo de lista de fantasmas capturados:
-
-| ID | Nombre                           | Clase  | Nivel de Peligro | Fecha de Captura |
-|----|----------------------------------|--------|-----------------|------------------|
-| 1  | Espíritu del Pescador de Lastres | Clase IV | Bajo          | 2025-01-26       |
-| 2  | Sombras del Monte Naranco       | Clase II | Medio         | 2025-01-24       |
-| 3  | Entidad de las Minas            | Clase VI | Alto          | 2025-01-20       |
+| ID | Nombre                           | Clase    | Nivel de Peligro | Fecha de Captura |
+|----|----------------------------------|---------|-----------------|------------------|
+| 1  | Espíritu del Pescador de Lastres | Clase IV | Bajo            | 2025-01-26       |
+| 2  | Sombras del Monte Naranco        | Clase II | Medio           | 2025-01-24       |
+| 3  | Entidad de las Minas             | Clase VI | Alto            | 2025-01-20       |
 
 ---
 
 ## Tecnologías Utilizadas
 
 - **Java (JDK 21)**
+- **Swing** (para la interfaz gráfica del juego, permitiendo capturar y liberar fantasmas visualmente)
 - **JUnit** (para pruebas)
 - **Maven** (gestión de dependencias)
 - **Hamcrest** (para pruebas unitarias)
@@ -135,11 +115,17 @@ Ejemplo de lista de fantasmas capturados:
 
 ## Autores
 
-👤 **Emma Lanza**
+👤 **Emma Lanza**  
 - GitHub: [@emmalanza](https://github.com/emmalanza)
 
-👤 **Yef Gav**
+👤 **Yef Gav**  
 - GitHub: [@YefGav](https://github.com/YefGav)
+
+👤 **Alejandro Arias**  
+- GitHub: [@AlejandroAriasSL](https://github.com/AlejandroAriasSL)
+
+👤 **Carlota Menéndez**  
+- GitHub: [@Carlotaml21](https://github.com/Carlotaml21)
 
 ---
 
@@ -167,3 +153,5 @@ Ejemplo de lista de fantasmas capturados:
 ## Licencia
 
 Este proyecto actualmente no tiene una licencia específica.
+
+
