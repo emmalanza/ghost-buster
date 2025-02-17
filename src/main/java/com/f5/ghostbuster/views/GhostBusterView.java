@@ -1,6 +1,10 @@
 package com.f5.ghostbuster.views;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,10 +15,13 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 
 import com.f5.ghostbuster.controller.GhostBusterController;
 import com.f5.ghostbuster.views.listeners.CaptureGhostListener;
 import com.f5.ghostbuster.views.listeners.FreeGhostListener;
+import com.f5.ghostbuster.views.renderers.GhostRenderer;
 
 public class GhostBusterView extends JFrame {
 
@@ -33,9 +40,10 @@ public class GhostBusterView extends JFrame {
 
         GhostBusterController  controller = ghostBusterController;
 
-        setTitle("Ghost Busters");
-        setSize(670, 480);
+        setTitle("GhostBuster");
+        setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setVisible(true);
         setLayout(new GridBagLayout());
 
@@ -49,6 +57,7 @@ public class GhostBusterView extends JFrame {
         gbc.weighty = 1.0;
 
         leftContainer = new JPanel();
+        leftContainer.setLayout(new GridBagLayout());
         leftContainer.setBackground(Color.decode("#D9D9D9"));
         add(leftContainer, gbc);
 
@@ -81,102 +90,86 @@ public class GhostBusterView extends JFrame {
         bottomGbc.anchor = GridBagConstraints.CENTER;
         bottomChildBox.setBackground(Color.decode("#d3d3d3"));
         bottomContainer.add(bottomChildBox, bottomGbc);
-
-    
+   
         ghostImg = new ImageIcon(getClass().getResource("/ghostbuster/ghost.png"));
         Image resizedImage = ghostImg.getImage().getScaledInstance(500, 500, Image.SCALE_SMOOTH);
         ghostImg = new ImageIcon(resizedImage);
         imgLabel = new JLabel(ghostImg);
         imageContainer.add(imgLabel);
 
-
+        List<JLabel> labels = Arrays.asList(
+            ghostName = new JLabel("Enter ghost name"),
+            ghostClass = new JLabel("Choose a class"),
+            ghostDanger = new JLabel("Choose danger lvl"),
+            ghostAbilities = new JLabel("Write down an ability")
+        );
+        
+        List<Component> components = Arrays.asList(
+            nameField = new JTextField(),
+            classBox = new JComboBox<>(),
+            dangerBox = new JComboBox<>(),
+            abilitiesField = new JTextField(),
+            captureButton = new JButton("Capture ghost")
+        ); 
 
         bottomChildBox.setLayout(new GridBagLayout());
+        GridBagConstraints boxGbc = new GridBagConstraints();
+        boxGbc.insets = new Insets(3, 10, 3, 10);
+        boxGbc.weightx = 0.8;
+        boxGbc.fill = GridBagConstraints.BOTH;
+        boxGbc.anchor = GridBagConstraints.CENTER;
+        
+        for (int i = 0; i < labels.size(); i++ ) {
+            boxGbc.gridx = i;
+            boxGbc.gridy = 0;
+            bottomChildBox.add(labels.get(i), boxGbc);
+        }
 
+        for (int i = 0; i < components.size(); i++) {
+            boxGbc.gridx = i;
+            boxGbc.gridy = 1;
+            boxGbc.weightx = (i == 4) ? 0.2 : 0.8;
+            bottomChildBox.add(components.get(i), boxGbc);
+        }
         
-        ghostName = new JLabel("Enter ghost name");
-        ghostClass = new JLabel("Choose a class");
-        ghostDanger = new JLabel("Choose danger lvl");
-        ghostAbilities = new JLabel("Write down an ability");
-        nameField = new JTextField();
-        classBox = new JComboBox<>();
-        
-        controller.getGhostClasses().forEach(classBox::addItem);
-        
-        dangerBox = new JComboBox<>();
-        
+        controller.getGhostClasses().forEach(classBox::addItem); 
         controller.getDangerLevels().forEach(dangerBox::addItem);
-        
-        abilitiesField = new JTextField();
-        captureButton = new JButton("Capture ghost");
+
         captureButton.setBackground(Color.decode("#ba181b"));
         captureButton.setFont(new Font("Arial", Font.BOLD, 12));
-        captureButton.setForeground(new Color(255, 230, 0));
+        captureButton.setForeground(new Color(255, 230, 0));       
         
-        GridBagConstraints boxGbc = new GridBagConstraints();
-        boxGbc.fill = GridBagConstraints.BOTH;
-
-        boxGbc.gridx = 0;
-        boxGbc.gridy = 0;
-        boxGbc.insets = new Insets(3, 10, 3, 10);
-        bottomChildBox.add(ghostName, boxGbc);
-        
-        boxGbc.gridx = 0;
-        boxGbc.gridy = 1;
-        boxGbc.weightx = 0.8;
-
-        bottomChildBox.add(nameField, boxGbc);
-
-        boxGbc.gridx = 1;
-        boxGbc.gridy = 0;
-
-        bottomChildBox.add(ghostClass, boxGbc);
-
-        boxGbc.gridx = 1;
-        boxGbc.gridy = 1;
-
-        bottomChildBox.add(classBox, boxGbc);
-
-        boxGbc.gridx = 2;
-        boxGbc.gridy = 0;
-
-        bottomChildBox.add(ghostDanger, boxGbc);
-        
-        boxGbc.gridx = 2;
-        boxGbc.gridy = 1;
-
-        bottomChildBox.add(dangerBox, boxGbc);
-
-        boxGbc.gridx = 3;
-        boxGbc.gridy = 0;
-
-        bottomChildBox.add(ghostAbilities, boxGbc);
-
-        boxGbc.gridx = 3;
-        boxGbc.gridy = 1;
-        bottomChildBox.add(abilitiesField, boxGbc);
-
-        boxGbc.gridx = 4;
-        boxGbc.gridy = 1;
-        boxGbc.weightx = 0.2;
-        bottomChildBox.add(captureButton, boxGbc);
-        
-        boxGbc.anchor = GridBagConstraints.CENTER;
-
-
         ghostListModel = new DefaultListModel<>();
         ghostList = new JList<>(ghostListModel);
+        ghostList.setCellRenderer(new GhostRenderer());
+        ghostList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        ghostList.setBackground(Color.decode("#D9D9D9"));
+        ghostList.setFixedCellHeight(230);
+
+        GridBagConstraints leftGbc = new GridBagConstraints(0, 0, 1, 1, 0.5, 1.0, 
+        GridBagConstraints.CENTER, GridBagConstraints.BOTH, 
+        new Insets(10, 10, 10, 10), 0, 0);
+        
         scrollPane = new JScrollPane(ghostList);
+        scrollPane.setBackground(Color.decode("#D9D9D9"));
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        leftContainer.add(scrollPane, leftGbc);
+        
         freeGhostButton = new JButton("Free Ghost");
         freeGhostButton.setBackground(Color.decode("#ba181b"));
         freeGhostButton.setFont(new Font("Arial", Font.BOLD, 12));
         freeGhostButton.setForeground(new Color(255, 230, 0));
-        leftContainer.add(scrollPane);
-        leftContainer.add(freeGhostButton);
-
+        
+        leftGbc.gridy++;
+        leftGbc.weighty = 0.1;
+        leftGbc.fill = GridBagConstraints.NONE;
+        leftContainer.add(freeGhostButton, leftGbc);
 
         captureButton.addActionListener(new CaptureGhostListener(this, controller));
         freeGhostButton.addActionListener(new FreeGhostListener(this, controller));
+        
         revalidate();
         repaint();
     }
