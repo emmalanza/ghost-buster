@@ -91,7 +91,7 @@ public class GhostBusterView extends JFrame {
         bottomChildBox.setBackground(Color.decode("#d3d3d3"));
         bottomContainer.add(bottomChildBox, bottomGbc);
    
-        ghostImg = new ImageIcon(getClass().getResource("/ghostbuster/ghost.png"));
+        ghostImg = new ImageIcon(getClass().getResource("/com/f5/ghostbuster/ghost.png"));
         Image resizedImage = ghostImg.getImage().getScaledInstance(500, 500, Image.SCALE_SMOOTH);
         ghostImg = new ImageIcon(resizedImage);
         imgLabel = new JLabel(ghostImg);

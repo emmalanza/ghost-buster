@@ -3,7 +3,6 @@ package com.f5.ghostbuster.views.renderers;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -29,7 +28,7 @@ public class GhostRenderer extends DefaultListCellRenderer {
 
         JPanel cellPanel = new JPanel(new BorderLayout()) {
 
-        private final Image customCell = new ImageIcon(getClass().getResource("/ghostbuster/card.png"))
+        private final Image customCell = new ImageIcon(getClass().getResource("/com/f5/ghostbuster/card.png"))
                 .getImage();
 
             @Override

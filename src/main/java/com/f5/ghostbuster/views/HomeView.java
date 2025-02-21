@@ -28,8 +28,7 @@ public class HomeView extends JFrame {
 
         JPanel mainPanel = new JPanel() {
             private final Image backgroundImage = new ImageIcon(
-                    getClass().getResource("/ghostbuster/ghostbusterhome.jpg"))
-                    .getImage();
+                getClass().getResource("/com/f5/ghostbuster/ghostbusterhome.jpg")).getImage();
 
             @Override
             protected void paintComponent(Graphics g) {
